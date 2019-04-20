@@ -33,14 +33,14 @@ def _set_socket(socket_nr, state):
 
 def _getCodeWordB(nChannelCode, state):
    sReturn = ''
-   code = ["11111", "01111", "10111", "11011", "11101", "11110"]
+   code = ["FFFFF", "0FFFF", "F0FFF", "FF0FF", "FFF0F", "FFFF0"]
 
    if nChannelCode < 1 or nChannelCode > 5:
       return '\0'
 
    for i in range(0, 5):
       if GROUP_NUMBER[i] == '0':
-         sReturn += '1'
+         sReturn += 'F'
       elif GROUP_NUMBER[i] == '1':
          sReturn += '0'
       else:
@@ -49,9 +49,8 @@ def _getCodeWordB(nChannelCode, state):
    sReturn += code[nChannelCode]
 
    if state:
-      sReturn += '01'
+      sReturn += '0F'
    else:
-      sReturn += '10'
+      sReturn += 'F0'
 
-   sReturn += '\0'
-   return int(sReturn, 2)
+   return int(sReturn, 16)
