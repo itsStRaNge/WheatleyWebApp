@@ -1,19 +1,15 @@
 from rpi_rf import RFDevice
 
-PULSE_LENGTH = 300
 REPEAT_TRANSMIT = 10
 RECEIVE_TOLERANCE = 60
 PROTOCOL = 1
 
-GROUP_NUMBER = "11100"
+GROUP_NUMBER = "FFF00"
 
 GPIO_PIN = 0
 
 
 rfdevice = RFDevice(GPIO_PIN)
-rfdevice.enable_tx()
-rfdevice.tx_repeat = REPEAT_TRANSMIT
-rfdevice.tx_pulselength = PULSE_LENGTH
 rfdevice.tx_repeat = REPEAT_TRANSMIT
 rfdevice.tx_proto = PROTOCOL
 
@@ -21,31 +17,26 @@ rfdevice.tx_proto = PROTOCOL
 def turn_socket_on(socket_nr):
    _set_socket(socket_nr, True)
 
+
 def turn_socket_off(socket_nr):
    _set_socket(socket_nr, False)
 
 
 def _set_socket(socket_nr, state):
+   rfdevice.enable_tx()
    code = _getCodeWordB(socket_nr, state)
-   rfdevice.tx_code(code=code)
+   # rfdevice.tx_code(code=code)
+   rfdevice.tx_bin(code)
    rfdevice.cleanup()
 
 
 def _getCodeWordB(nChannelCode, state):
-   sReturn = ''
-   code = ["FFFFF", "0FFFF", "F0FFF", "FF0FF", "FFF0F", "FFFF0"]
+   sReturn = GROUP_NUMBER
 
    if nChannelCode < 1 or nChannelCode > 5:
       return '\0'
 
-   for i in range(0, 5):
-      if GROUP_NUMBER[i] == '0':
-         sReturn += 'F'
-      elif GROUP_NUMBER[i] == '1':
-         sReturn += '0'
-      else:
-         return '\0'
-
+   code = ["FFFFF", "0FFFF", "F0FFF", "FF0FF", "FFF0F", "FFFF0"]
    sReturn += code[nChannelCode]
 
    if state:
@@ -53,4 +44,6 @@ def _getCodeWordB(nChannelCode, state):
    else:
       sReturn += 'F0'
 
-   return int(sReturn, 16)
+   sReturn += "\0"
+
+   return sReturn  # int(sReturn, 16)
