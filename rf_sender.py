@@ -27,7 +27,8 @@ def turn_socket_off(socket_nr):
 
 def _set_socket(socket_nr, state):
    code = _getCodeWordB(socket_nr, state)
-   rfdevice.tx_code(code=code)
+   print(code)
+   # rfdevice.tx_code(code=code)
    rfdevice.cleanup()
 
 
