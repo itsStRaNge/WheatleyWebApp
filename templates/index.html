@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Wheatley</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="style" href="{{ url_for('static', filename='css/main.css') }}">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            function update_e_socket(socket_type) {
+                $.get('/socket/' + socket_type,);
+            }
+        </script>
+    </head>
+    <b>Wheatley is watching</b>
+    <br>
+    <img src="static/images/wheatley.png" alt="Wheatley is watching" width="5%" height="auto"/>
+    <br><br>
+    <!-- Rounded switch -->
+    <button onClick="update_e_socket('Wall Light')">
+        Update Socket 42
+    </button>
+    <button onClick="update_e_socket('Bed Light')">
+        Update Socket 42
+    </button>
+    <button onClick="update_e_socket('Music Power')">
+        Update Socket 42
+    </button>
+    <button onClick="update_e_socket('Monitor Power')">
+        Update Socket 42
+    </button>
+</html>
