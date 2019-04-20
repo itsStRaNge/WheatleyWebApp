@@ -27,14 +27,13 @@ def turn_socket_off(socket_nr):
 
 def _set_socket(socket_nr, state):
    code = _getCodeWordB(socket_nr, state)
-   print(code)
-   # rfdevice.tx_code(code=code)
+   rfdevice.tx_code(code=code)
    rfdevice.cleanup()
 
 
 def _getCodeWordB(nChannelCode, state):
    sReturn = ''
-   code = ["FFFFF", "0FFFF", "F0FFF", "FF0FF", "FFF0F", "FFFF0"]
+   code = ["11111", "01111", "10111", "11011", "11101", "11110"]
 
    if nChannelCode < 1 or nChannelCode > 5:
       return '\0'
@@ -50,9 +49,9 @@ def _getCodeWordB(nChannelCode, state):
    sReturn += code[nChannelCode]
 
    if state:
-      sReturn += '0F'
+      sReturn += '01'
    else:
-      sReturn += 'F0'
+      sReturn += '10'
 
    sReturn += '\0'
-   return sReturn
+   return int(sReturn, 2)

@@ -13,7 +13,7 @@ class ESocket:
     def __init__(self, name):
         self.name = name
         self.id = SOCKET_MAP[name]
-        self.state = True
+        self.state = False
         rf_sender.turn_socket_on(self.id)
 
 
@@ -22,9 +22,9 @@ class ESocket:
 
     def toggle(self):
         if self.state:
-            self.turn_on()
-        else:
             self.turn_off()
+        else:
+            self.turn_on()
 
     def turn_on(self):
         self.state = True
@@ -34,5 +34,5 @@ class ESocket:
 
     def turn_off(self):
         self.state = False
-        # rf_sender.turn_socket_off(self.id)
+        rf_sender.turn_socket_off(self.id)
         print("%s turned off" % self)
