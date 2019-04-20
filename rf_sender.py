@@ -40,7 +40,7 @@ def _getCodeWordB(nChannelCode, state):
 
    for i in range(0, 5):
       if GROUP_NUMBER[i] == '0':
-         sReturn += 'F'
+         sReturn += '1'
       elif GROUP_NUMBER[i] == '1':
          sReturn += '0'
       else:
