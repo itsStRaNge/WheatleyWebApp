@@ -1,17 +1,18 @@
 from rpi_rf import RFDevice
 
-REPEAT_TRANSMIT = 10
-RECEIVE_TOLERANCE = 60
-PROTOCOL = 1
+
 
 GROUP_NUMBER = "FFF00"
 
 GPIO_PIN = 0
 
 
-rfdevice = RFDevice(GPIO_PIN)
-rfdevice.tx_repeat = REPEAT_TRANSMIT
-rfdevice.tx_proto = PROTOCOL
+rfdevice = RFDevice(GPIO_PIN,
+                    tx_proto=1,
+                    tx_pulselength=300,
+                    tx_repeat=10,
+                    tx_length=12,
+                    rx_tolerance=60)
 rfdevice.enable_tx()
 
 
@@ -25,9 +26,10 @@ def turn_socket_off(socket_nr):
 
 def _set_socket(socket_nr, state):
    code = _getCodeWordB(socket_nr, state)
-   rfdevice.tx_length = len(code)
-   # rfdevice.tx_code(code=code)
+   print("length %s" % len(code))
+   print(code)
    rfdevice.tx_bin(code)
+   # rfdevice.tx_code(code=code)
 
 
 def _getCodeWordB(nChannelCode, state):
