@@ -31,10 +31,10 @@ class ESocket:
         self.state = 1
         self.trigger()
 
-
     def turn_off(self):
         self.state = 0
         self.trigger()
+
     def trigger(self):
         print("%s set to %s" % (self, self.state))
         msg = {
