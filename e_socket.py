@@ -8,7 +8,9 @@ SOCKET_MAP = {
     "Music Power": 2,
     "Monitor Power": 5
 }
+
 tcp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcp_sock.connect(("192.168.2.10", 5005))
 
 
 class ESocket:
@@ -41,6 +43,4 @@ class ESocket:
             "Socket": self.id,
             "state": self.state
         }
-        tcp_sock.connect(("192.168.2.10", 5005))
         tcp_sock.sendall(json.dumps(msg).encode())
-        tcp_sock.close()
