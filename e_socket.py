@@ -1,4 +1,6 @@
-import rf_sender
+import socket
+import json
+
 
 SOCKET_MAP = {
     "Wall Light": 4,
@@ -6,6 +8,7 @@ SOCKET_MAP = {
     "Music Power": 2,
     "Monitor Power": 5
 }
+tcp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
 class ESocket:
@@ -13,12 +16,10 @@ class ESocket:
     def __init__(self, name):
         self.name = name
         self.id = SOCKET_MAP[name]
-        self.state = False
-        rf_sender.turn_socket_on(self.id)
-
+        self.state = 0
 
     def __str__(self):
-        return "< %s >" % self.name
+        return "<%s>" % self.name
 
     def toggle(self):
         if self.state:
@@ -27,12 +28,19 @@ class ESocket:
             self.turn_on()
 
     def turn_on(self):
-        self.state = True
-        rf_sender.turn_socket_on(self.id)
-        print("%s turned on" % self)
+        self.state = 1
+        self.trigger()
 
 
     def turn_off(self):
-        self.state = False
-        rf_sender.turn_socket_off(self.id)
-        print("%s turned off" % self)
+        self.state = 0
+        self.trigger()
+    def trigger(self):
+        print("%s set to %s" % (self, self.state))
+        msg = {
+            "Socket": self.id,
+            "state": self.state
+        }
+        tcp_sock.connect(("192.168.2.10", 5005))
+        tcp_sock.sendall(json.dumps(msg))
+        tcp_sock.close()
