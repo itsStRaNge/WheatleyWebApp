@@ -15,27 +15,38 @@
         </script>
     </head>
     <style type="text/css">
-        body { background: navy !important; }
+        body { background: black !important; }
     </style>
-    <b>Wheatley is watching</b>
-    <br>
-    <br>
-    <img src="static/images/wheatley.png" alt="Wheatley is watching" width="5%" height="auto"/>
-    <br><br>
-    <!-- Rounded switch -->
-    <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Wall Light')">
-        Wall Light
-    </button>
-    <br><br>
-    <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Bed Light')">
-        Bed Light
-    </button>
-    <br><br>
-    <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Music Power')">
-        Music Power
-    </button>
-    <br><br>
-    <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Monitor Power')">
-        Monitor Power
-    </button>
+    <div class="text-center">
+        <br>
+        <h3 class="text-light">Wheatley is watching</h3>
+        <br>
+        <br>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-2">
+            <div class="text-center">
+                <img src="static/images/wheatley.png" class="rounded" alt="Wheatley is watching">
+            </div>
+            <br><br>
+            <!-- Rounded switch -->
+            <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Wall Light')">
+                Wall Light
+            </button>
+            <br><br>
+            <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Bed Light')">
+                Bed Light
+            </button>
+            <br><br>
+            <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Music Power')">
+                Music Power
+            </button>
+            <br><br>
+            <button  class="btn btn-primary btn-lg btn-block" onClick="update_e_socket('Monitor Power')">
+                Monitor Power
+            </button>
+        </div>
+        <div class="col"></div>
+    </div>
 </html>
