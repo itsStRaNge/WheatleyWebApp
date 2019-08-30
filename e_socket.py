@@ -41,6 +41,6 @@ class ESocket:
         print("%s set to %s" % (self, self.state))
         msg = {
             "Socket": self.id,
-            "state": self.state
+            "State": self.state
         }
         tcp_sock.sendall(json.dumps(msg).encode())
