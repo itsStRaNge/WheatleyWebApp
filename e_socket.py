@@ -1,16 +1,16 @@
 import socket
 import json
-
+import config
 
 SOCKET_MAP = {
-    "Wall Light": 4,
-    "Bed Light": 3,
-    "Music Power": 2,
-    "Monitor Power": 5
+    config.WALL_LIGHT_SOCKET: 4,
+    config.BED_LIGHT_SOCKET: 3,
+    config.MUSIC_POWER_SOCKET: 2,
+    config.MONITOR_POWER_SOCKET: 5
 }
 
 tcp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-tcp_sock.connect(("192.168.2.10", 5005))
+tcp_sock.connect((config.IP, config.RF_PORT))
 
 
 class ESocket:
