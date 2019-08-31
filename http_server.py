@@ -20,7 +20,12 @@ def update_socket(name):
         e_sockets[name].toggle()
     elif flask.request.method == 'POST':
         data = flask.request.json
-        print(data)
+        if data['State'] == "on":
+            e_sockets[name].turn_on()
+        elif data['State'] == "off":
+            e_sockets[name].turn_off()
+        else:
+            print("Invalid state: %s" % data)
     return ''
 
 
