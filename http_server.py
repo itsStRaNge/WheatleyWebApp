@@ -32,7 +32,7 @@ def update_socket(name):
 def start():
     for key in SOCKET_MAP:
         e_sockets[key] = ESocket(key)
-    app.run(host='0.0.0.0', port=config.HTTP_PORT)
+    app.run(host='0.0.0.0', port=config.HTTP_PORT, threaded=True)
 
 
 if __name__ == '__main__':
